@@ -1,5 +1,5 @@
-# bootcamp11
-Projeto para estudo do curso bootcamp 11 da rocketseat
+# BOOTCAMP 11 
+Projeto destinado para estudo do curso da rocketseat
 
 # Stack
 * NodeJS
