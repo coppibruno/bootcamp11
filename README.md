@@ -5,5 +5,5 @@ Projeto destinado para estudo do curso da rocketseat
 * NodeJS
 * ReactJS
 * TypeScript
-* NoSQL
 * Docker
+* Progres
