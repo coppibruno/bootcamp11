@@ -27,46 +27,41 @@ interface jsonUpdateAvatar {
 }
 
 usersRouter.post('/', async (request, response) => {
-    try {
-        const { name, email, password } = request.body;
 
-        const createUser = new CreateUserService();
+    const { name, email, password } = request.body;
 
-        const user = await createUser.execute({
-            name,
-            email,
-            password
-        });
+    const createUser = new CreateUserService();
 
-        //retirando o password do retorno
-        const object: objReturned = {
-            name: user.name,
-            email: user.email
-        }
+    const user = await createUser.execute({
+        name,
+        email,
+        password
+    });
 
-        return response.json(object);
-    } catch (error) {
-        return response.status(400).json({error: error.message})
+    //retirando o password do retorno
+    const object: objReturned = {
+        name: user.name,
+        email: user.email
     }
+
+    return response.json(object);
+
 });
 
 //atualização de campo especifico
 usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), async(request: any, response) => {
-    try {
-        const updateUserAvatar = new UpdateUserAvatarService();
+    const updateUserAvatar = new UpdateUserAvatarService();
 
-        const user = await updateUserAvatar.execute({
-            user_id: request.user.id,
-            avatarFilename: request.file.filename
-        });
+    const user = await updateUserAvatar.execute({
+        user_id: request.user.id,
+        avatarFilename: request.file.filename
+    });
 
-        delete user.password;
+    delete user.password;
 
-        return response.json(user);
+    return response.json(user);
 
-    } catch (error) {
-        return response.status(400).json({error: error.message})
-    }
+
 })
 
 export default usersRouter;

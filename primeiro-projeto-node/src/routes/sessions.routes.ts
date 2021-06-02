@@ -14,30 +14,28 @@ interface objResponse {
 
 sessionsRouter.post('/', async (request, response) => {
 
-    try {
-        const { email, password } = request.body;
 
-        const authenticateUser = new AuthenticateUserService();
+    const { email, password } = request.body;
 
-        const { user, token } = await authenticateUser.execute({
-            email,
-            password,
-        })
+    const authenticateUser = new AuthenticateUserService();
 
-        //constroi o response
-        const userResponse: objResponse = {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            created_at: user.created_at,
-            updated_at: user.updated_at
-        }
+    const { user, token } = await authenticateUser.execute({
+        email,
+        password,
+    })
 
-        return response.json({ user: userResponse, token})
-
-    } catch (error) {
-        return response.status(400).json({error: error.message});
+    //constroi o response
+    const userResponse: objResponse = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        created_at: user.created_at,
+        updated_at: user.updated_at
     }
+
+    return response.json({ user: userResponse, token})
+
+
 
 });
 
